@@ -105,4 +105,15 @@ class Scientist extends Staff{
 * this.f1()
 *
 *
+* "Test"
+* "Demo"
+* "Rose"
+* "Jack"
+*
+*
+* john
+* jack
+*
+*
+*
 * */
