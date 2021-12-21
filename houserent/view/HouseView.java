@@ -45,6 +45,19 @@ public class HouseView {
         House house = new House(0,name,phone,address,rent,state);
         houseService.add(house);
     }
+    //接受输入的id,调用Service的del方法
+    public void delHouse(){
+        System.out.println("===============删除房屋信息===============");
+        System.out.println("请输入房屋编号(-1退出)");
+        int delId = scanner.nextInt();
+        if(delId==-1){
+            System.out.println("放弃删除信息");
+            return;
+        }
+        System.out.println("请确认是否删除(Y/N)");
+
+
+    }
 
     //显示主菜单
     public void mianMenu(){
