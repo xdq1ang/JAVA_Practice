@@ -6,12 +6,46 @@ package src.houserent.view;
 *
 * */
 
+import src.houserent.domain.House;
+import src.houserent.service.HouseService;
+
 import java.util.Scanner;
 
 public class HouseView {
     private boolean loop=true;//控制显示菜单
     private int key;//接收用户选择
     Scanner scanner = new Scanner(System.in);
+    private HouseService houseService = new HouseService(3);
+    //编写listHouse()显示房屋信息
+    public void listHouse(){
+        System.out.println("=============房屋列表=============");
+        System.out.println("编号\t\t房主\t\t电话\t\t地址\t\t月租\t\t状态");
+        House[] houses = houseService.list();
+        for(House h : houses){
+            if(h==null){
+                break;
+            }
+            System.out.println(h);
+        }
+        System.out.println("房屋列表显示完毕");
+    }
+    //接收输入，创建house对象，调用add方法
+    public void addHouse(){
+        System.out.println("==============添加房屋==============");
+        System.out.println("姓名:");
+        String name = scanner.next();
+        System.out.println("电话:");
+        String phone = scanner.next();
+        System.out.println("地址:");
+        String address = scanner.next();
+        System.out.println("月租:");
+        int rent = scanner.nextInt();
+        System.out.println("状态:");
+        String state = scanner.next();
+        House house = new House(0,name,phone,address,rent,state);
+        houseService.add(house);
+    }
+
     //显示主菜单
     public void mianMenu(){
         do{
@@ -25,11 +59,11 @@ public class HouseView {
             System.out.println("请输入你的选择(1-6)");
             key =scanner.nextInt();
             switch (key) {
-                case 1 -> System.out.println("新增房源");
+                case 1 -> addHouse();
                 case 2 -> System.out.println("查找房源");
                 case 3 -> System.out.println("删除房源");
                 case 4 -> System.out.println("修改房源信息");
-                case 5 -> System.out.println("显示房源信息");
+                case 5 -> listHouse();
                 case 6 -> {
                     System.out.println("退出系统");
                     loop = false;
