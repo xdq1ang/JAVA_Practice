@@ -8,6 +8,10 @@ package src.houserent.service;
 * */
 
 import src.houserent.domain.House;
+
+import java.util.Arrays;
+import java.util.Iterator;
+
 public class HouseService {
     private House[] houses;
     private int houseNum=1;
@@ -31,4 +35,20 @@ public class HouseService {
             return true;
         }
     }
+    public boolean del(int id){
+        boolean deled=false;
+        Iterator<House> it = Arrays.stream(houses).iterator();
+        while(it.hasNext()){
+            if(it.next().getId()==id){
+                it.remove();
+                deled=true;
+            }
+        }
+        if(deled){
+            System.out.println("删除成功！");
+        }else{
+            System.out.println("删除失败！，不存在这个id");
+        }
+        return deled;
+        }
 }

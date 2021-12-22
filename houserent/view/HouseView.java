@@ -9,6 +9,8 @@ package src.houserent.view;
 import src.houserent.domain.House;
 import src.houserent.service.HouseService;
 
+import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class HouseView {
@@ -46,15 +48,46 @@ public class HouseView {
         houseService.add(house);
     }
     //接受输入的id,调用Service的del方法
-    public void delHouse(){
+    public void delHouse() {
         System.out.println("===============删除房屋信息===============");
         System.out.println("请输入房屋编号(-1退出)");
-        int delId = scanner.nextInt();
-        if(delId==-1){
-            System.out.println("放弃删除信息");
+
+        //如果输入的是整数，跳出循环
+        //如果不是整数会报错，继续循环
+        int delId =-999;
+
+        while(true){
+            try {
+                delId = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                scanner.next();//;貌似是把之前那个输入字符给顶走了。就可以在输入了
+                System.out.println("请输入整数！");
+            }
+        }
+
+        if (delId == -1) {
+            System.out.println("放弃删除");
             return;
         }
+        //如果输入Y/N，停止循环输入。如果不是则继续循环。
+        String isDel;//是否删除
         System.out.println("请确认是否删除(Y/N)");
+        while (true) {
+            isDel = scanner.next().toUpperCase(Locale.ROOT);
+            if (isDel.equals("Y") || isDel.equals("N")) {
+                break;
+            } else {
+                System.out.println("输入有误！请输入Y/N");
+            }
+        }
+        //如果Y,删除，如果N取消删除
+        if (isDel.equals("N")) {
+            System.out.println("取消删除");
+            return;
+        } else if (isDel.equals("Y")) {
+            houseService.del(delId);
+        }
 
 
     }
@@ -74,7 +107,7 @@ public class HouseView {
             switch (key) {
                 case 1 -> addHouse();
                 case 2 -> System.out.println("查找房源");
-                case 3 -> System.out.println("删除房源");
+                case 3 -> delHouse();
                 case 4 -> System.out.println("修改房源信息");
                 case 5 -> listHouse();
                 case 6 -> {
