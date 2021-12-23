@@ -92,6 +92,64 @@ public class HouseView {
 
     }
 
+    //查找信息
+    public void searchHouse(){
+        System.out.println("========查找房源信息========");
+        System.out.println("请输入房源id:");
+        //输入整数，否则提示重新输入
+        int id=-1;
+        while(true){
+            try {
+                 id = scanner.nextInt();
+                 break;
+            }catch (Exception e){
+                scanner.next();
+                System.out.println("请输入整数");
+            }
+        }
+        houseService.search(id);
+    }
+    //修改信息
+    public void modifyInfo(){
+        int id;
+        System.out.println("========修改房源信息========");
+        System.out.println("输入待修改房源id");
+        //必须输入整数
+        while(true) {
+            try {
+                id = scanner.nextInt();
+                break;
+            }catch (Exception e){
+                scanner.next();
+                System.out.println("请输入整数！！");
+            }
+        }
+        houseService.modify(id);
+
+
+
+    }
+    //退出系统
+    public void exist(){
+        System.out.println("是否退出Y/N");
+        String exist="";
+        //退出确认
+        while(true){
+            exist = scanner.next().toUpperCase(Locale.ROOT);
+            if(exist.equals("Y") || exist.equals("N")){
+                break;
+            }else{
+                System.out.println("输入错误！请输入Y/N");
+            }
+        }
+        if(exist.equals("Y")){
+            System.out.println("退出系统");
+            loop = false;
+        }else {
+            System.out.println("退出取消");
+        }
+    }
+
     //显示主菜单
     public void mianMenu(){
         do{
@@ -106,14 +164,11 @@ public class HouseView {
             key =scanner.nextInt();
             switch (key) {
                 case 1 -> addHouse();
-                case 2 -> System.out.println("查找房源");
+                case 2 -> searchHouse();
                 case 3 -> delHouse();
-                case 4 -> System.out.println("修改房源信息");
+                case 4 -> modifyInfo();
                 case 5 -> listHouse();
-                case 6 -> {
-                    System.out.println("退出系统");
-                    loop = false;
-                }
+                case 6 -> exist();
                 default -> System.out.println("输入有误");
             }
 
