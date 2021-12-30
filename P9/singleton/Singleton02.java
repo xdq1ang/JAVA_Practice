@@ -4,7 +4,6 @@ public class Singleton02 {
     public static void main(String[] args) {
         GirlFriend2.getInstance();
         GirlFriend2.getInstance();
-
     }
 }
 
@@ -23,7 +22,7 @@ class GirlFriend2{
 }
 
 /*
-* 懒汉式：
+* 懒汉式（存在线程安全）：只有用户使用getInstance()时，才创建对象。
 * 1.构造函数私有化
 * 2.在类内部提供公有方法进行实例申请（如果已经创建过则不在重复实例化）
 *
