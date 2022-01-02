@@ -10,3 +10,6 @@
 1. enum替代class
 2. public static final Season SPRING = new Season("春天","温暖")直接用SPRING("春天","温暖")。多个之间用逗号隔开
 3. 枚举对象必须放在类的开头
+
+### 注意
+枚举类已经继承了enum类，不能再继承其他类。可以实现接口
