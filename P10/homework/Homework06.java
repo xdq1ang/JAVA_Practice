@@ -2,11 +2,9 @@ package src.P10.homework;
 
 public class Homework06 {
     public static void main(String[] args) {
-        Person person0= new Person("唐僧", "大河");
-        Person person1 = new Person("唐僧", "一般");
-        System.out.println(person1);
-        person0.vehicles.work();
-        person1.vehicles.work();
+        Person person= new Person("唐僧");
+        person.common();
+        person.passRiver();
     }
 }
 
@@ -33,14 +31,12 @@ class Util{
     public static Horse getHorse(){
         return new Horse();
     }
-    public static Boat getBoat(){
-        return new Boat();
-    }
+    public static Boat getBoat() { return new Boat(); }
 }
 
 class Person{
     private String name;
-    Vehicles vehicles;
+    private Vehicles vehicles;
 
     @Override
     public String toString() {
@@ -50,13 +46,19 @@ class Person{
                 '}';
     }
 
-    public Person(String name, String road) {
+    public Person(String name) {
         this.name = name;
-        if(road.equals("大河")){
+    }
+    public void passRiver(){
+        if(!(this.vehicles instanceof Boat)){
             this.vehicles=Util.getBoat();
-        }else{
-            this.vehicles = Util.getHorse();
         }
-
+        this.vehicles.work();
+    }
+    public void common(){
+        if(!(this.vehicles instanceof Horse)){
+            this.vehicles=Util.getHorse();
+        }
+        this.vehicles.work();
     }
 }
