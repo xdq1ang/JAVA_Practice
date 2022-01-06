@@ -18,7 +18,7 @@ class Car{
     }
     public Car(){
         this.price=9;
-        this.color="red";
+        color="red";
     }
     public Car(double price){
         this.price=price;

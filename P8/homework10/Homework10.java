@@ -66,10 +66,6 @@ class Doctor{
     @Override
     public boolean equals(Object obj) {
         Doctor d = (Doctor)obj;
-        if(d.name.equals(this.name) && d.job.equals(this.job) && d.age==this.age && d.sal==this.sal &&d.gender==this.gender){
-            return true;
-        }else{
-            return false;
-        }
+        return d.name.equals(this.name) && d.job.equals(this.job) && d.age == this.age && d.sal == this.sal && d.gender == this.gender;
     }
 }

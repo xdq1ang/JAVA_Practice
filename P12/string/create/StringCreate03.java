@@ -8,7 +8,7 @@ public class StringCreate03 {
         String s1 =  "xdqiang";
         String s2 = "java";
         String s4 = "java";
-        String s3 = new String("java");
+        String s3 = "java";
         System.out.println(s2==s3);//false
         System.out.println(s2==s4);//true
         System.out.println(s2.equals(s3));//true

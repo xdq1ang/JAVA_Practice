@@ -1,9 +1,9 @@
 package src.P8.equalsoverride;
 
 public class Person {
-    private String name;
-    private int age;
-    private char gender;
+    private final String name;
+    private final int age;
+    private final char gender;
     public Person(String name,int age,char gender){
         this.name = name;
         this.age = age;
@@ -12,10 +12,6 @@ public class Person {
 
     @Override
     public boolean equals(Object obj) {
-        if(((Person)obj).name.equals(this.name) && ((Person)obj).age==this.age && ((Person)obj).gender == this.gender){
-            return true;
-        }else{
-            return false;
-        }
+        return ((Person) obj).name.equals(this.name) && ((Person) obj).age == this.age && ((Person) obj).gender == this.gender;
     }
 }

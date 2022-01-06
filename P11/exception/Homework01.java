@@ -22,7 +22,7 @@ class EcmDef{
             double d2 = Double.parseDouble(args[1]);
             System.out.println(d1/d2);
         }catch (NumberFormatException e){
-            System.out.println("请输入整数");;
+            System.out.println("请输入整数");
         }catch (ArithmeticException e){
             System.out.println("除数不能为0");
         }

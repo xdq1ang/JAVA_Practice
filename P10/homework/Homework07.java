@@ -8,7 +8,7 @@ public class Homework07 {
     }
 }
 class Car1{
-    private double temperature;
+    private final double temperature;
 
     public Car1(double temperature) {
         this.temperature = temperature;

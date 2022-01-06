@@ -35,7 +35,7 @@ class Util{
 }
 
 class Person{
-    private String name;
+    private final String name;
     private Vehicles vehicles;
 
     @Override

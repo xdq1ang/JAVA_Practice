@@ -21,8 +21,8 @@ public class EnumMethod {
 enum Season2{
     SUMMER("夏天","温暖"),WINTER("冬天","寒冷");
 
-    private String name;
-    private String desc;
+    private final String name;
+    private final String desc;
 
     Season2(String name, String desc) {
         this.name = name;

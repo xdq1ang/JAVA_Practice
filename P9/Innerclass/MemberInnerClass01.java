@@ -14,11 +14,11 @@ public class MemberInnerClass01 {
 }
 
 class Outer08{
-    private int n1 = 10;
+    private final int n1 = 10;
     public String name = "zhang san";
     class Inner08{             //成员内部类（和外部类一样可以加修饰符，但是局部内部类不能加修饰符）
         double sal = 99.8;
-        private int n1 = 6;
+        private final int n1 = 6;
         public void say(){
             System.out.println(n1);//就近访问
             System.out.println(Outer08.this.n1);//访问外部类成员

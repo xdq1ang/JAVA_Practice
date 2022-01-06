@@ -9,7 +9,7 @@ public class CodeBlock01 {
 class Move{
     private String name;
     private double price;
-    private String director;
+    private final String director;
     //构造器中有相同的语句（冗余），抽取到代码块中
     //不管调用哪个构造器前，都会调用这个代码块
     {

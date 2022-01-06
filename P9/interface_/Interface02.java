@@ -7,10 +7,10 @@ public class Interface02 {
     }
 }
 interface AInterface{
-    public int n1 = 10;
+    int n1 = 10;
     //在接口中可以省略abstract关键词
-    public void hi();
-    public static void ok(){
+    void hi();
+    static void ok(){
         System.out.println("ok!");
     }
     default void ok1(){

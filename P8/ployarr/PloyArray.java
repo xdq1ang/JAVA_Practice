@@ -21,8 +21,8 @@ public class PloyArray {
 }
 
 class Person{
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
 
     public Person(String name, int age) {
         this.name = name;
@@ -44,7 +44,7 @@ class Person{
 
 
 class Student extends Person{
-    private double score;
+    private final double score;
 
     public Student(String name, int age, double score) {
         super(name, age);
@@ -66,7 +66,7 @@ class Student extends Person{
 }
 
 class Tescher extends Person{
-    private double salary;
+    private final double salary;
 
     @Override
     public void say() {

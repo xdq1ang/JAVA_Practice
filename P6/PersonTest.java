@@ -1,4 +1,4 @@
-package P6;
+package src.P6;
 public class PersonTest{
     public static void main(String[] args) {
         Person p = new Person("xdqiang",12);
@@ -7,8 +7,8 @@ public class PersonTest{
         System.out.println(p1.name);
         System.out.println(p1.age);
 
-        String s2 =new String("xdqiang");
-        String s1 =new String( "xdqiang");
+        String s2 = "xdqiang";
+        String s1 = "xdqiang";
         String s3 ="xdqiang";
         String s4 = "xdqiang";
         /*

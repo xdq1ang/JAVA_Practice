@@ -16,18 +16,22 @@ public class ExtendsTheory {
 
     }
 }
-class GrandPa{
-    String name="大头爷爷";
-    private String hobby="旅游";
-    public String getHobby(){
+
+class GrandPa {
+    String name = "大头爷爷";
+    private final String hobby = "旅游";
+
+    public String getHobby() {
         return this.hobby;
     }
 }
-class Father extends GrandPa{
+
+class Father extends GrandPa {
     String name = "大头爸爸";
     int age = 39;
 }
-class Son extends Father{
+
+class Son extends Father {
     String name = "大头儿子";
 }
 

@@ -1,4 +1,4 @@
-package P7;
+package src.P7;
 
 public class TestPerson {
     public static void main(String[] args) {
@@ -22,10 +22,6 @@ class Person2{
         this.age=age;
     }
     public boolean compareTo(Person2 p){
-        if(p.name.equals(this.name) && p.age==this.age){
-            return true;
-        }else{
-            return false;
-        }
+        return p.name.equals(this.name) && p.age == this.age;
     }
 }

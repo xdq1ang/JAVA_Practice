@@ -13,7 +13,7 @@ public class AnonymousInnerClass {
 }
 
 class Outer04{
-    private int n1 = 10;
+    private final int n1 = 10;
     public void method(){
         //基于接口的匿名内部类
         //1.需求：传统实现IA接口需要创建类并实现该接口然后创建对象。然而如果这个类只使用一次以后不再使用（可以使用匿名内部类简化）。
@@ -44,7 +44,7 @@ class Outer04{
 
 }
 interface IA{
-    public void cry();//public 可以不写
+    void cry();//public 可以不写
 }
 class Father{
     public Father(String name){

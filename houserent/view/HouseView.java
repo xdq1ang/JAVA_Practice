@@ -17,7 +17,7 @@ public class HouseView {
     private boolean loop=true;//控制显示菜单
     private int key;//接收用户选择
     Scanner scanner = new Scanner(System.in);
-    private HouseService houseService = new HouseService(3);
+    private final HouseService houseService = new HouseService(3);
     //编写listHouse()显示房屋信息
     public void listHouse(){
         System.out.println("=============房屋列表=============");

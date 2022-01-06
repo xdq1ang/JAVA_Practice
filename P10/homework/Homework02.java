@@ -16,7 +16,7 @@ public class Homework02 {
 
 class Fork{
     private static int currentNum=100000;
-    private int serialNumber;
+    private final int serialNumber;
     public static int getNextNum(){
         currentNum+=100;
         return currentNum;

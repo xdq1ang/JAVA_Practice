@@ -20,10 +20,10 @@ public class Enumeration03 {
 * */
 enum SeasonEnum03 {
     SPRING("春天","温暖"),SUMMER("夏天","炎热");
-    private String name;
-    private String desc;
+    private final String name;
+    private final String desc;
 
-    private SeasonEnum03(String name, String desc) {
+    SeasonEnum03(String name, String desc) {
         this.name = name;
         this.desc = desc;
     }

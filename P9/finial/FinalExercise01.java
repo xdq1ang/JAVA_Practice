@@ -8,7 +8,7 @@ public class FinalExercise01 {
 }
 
 class Circle{
-    private double r;
+    private final double r;
     private final double PI = 3.14;
 
     public Circle(double r) {

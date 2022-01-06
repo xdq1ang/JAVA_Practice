@@ -25,8 +25,8 @@ public class Enumeration02 {
 //2. 去掉setter(),防止属性被修改
 //3. 在类内部直接创建固定的对象(public static final)
 class SeasonEnum {
-    private String name;
-    private String desc;
+    private final String name;
+    private final String desc;
     public static final SeasonEnum SPRING = new SeasonEnum("春天", "温暖");
     public static final SeasonEnum SUMMER = new SeasonEnum("夏天", "炎热");
     public static final SeasonEnum AUTUMN = new SeasonEnum("秋天", "凉爽");

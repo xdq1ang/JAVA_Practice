@@ -12,10 +12,10 @@ import src.houserent.domain.House;
 import java.util.Scanner;
 
 public class HouseService {
-    private House[] houses;
+    private final House[] houses;
     private int houseNum=1;
     private int idCounter = 1;//记录id自增长
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public HouseService(int size){
         houses = new House[size];

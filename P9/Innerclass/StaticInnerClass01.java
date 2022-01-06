@@ -17,12 +17,12 @@ public class StaticInnerClass01 {
 }
 
 class Outer10{
-    private int n1 =10;
-    private static String name="zhang san";
+    private final int n1 =10;
+    private static final String name="zhang san";
     private static void cry(){}
     //静态内部类
     static class Inner10{
-        private static String name = "xdqiang";
+        private static final String name = "xdqiang";
         public void say(){
             cry();
             System.out.println(name);//可以访问外部类静态成员

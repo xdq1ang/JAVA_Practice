@@ -8,8 +8,8 @@ public class Interface01 {
 }
 
 interface UsbInterface{
-    public void start();
-    public void stop();
+    void start();
+    void stop();
 }
 
 class Phone implements UsbInterface{

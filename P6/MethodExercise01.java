@@ -1,4 +1,4 @@
-package P6;
+package src.P6;
 
 public class MethodExercise01 {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class MethodExercise01 {
 }
 class AA{
     public static boolean isOdd(int num){
-        return num%2==0?false:true;
+        return num % 2 != 0;
     }
     public static void printChar(int h,int l,char c){
         for(int i=0;i<h;i++){

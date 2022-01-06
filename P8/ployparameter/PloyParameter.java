@@ -26,8 +26,8 @@ public class PloyParameter {
     }
 }
 class Employee{
-    private String name;
-    private double salary;
+    private final String name;
+    private final double salary;
 
     public Employee(String name, double salary) {
         this.name = name;
@@ -58,7 +58,7 @@ class NormalWorker extends Employee{
     }
 }
 class Manager extends Employee{
-    private double bonus;
+    private final double bonus;
 
     public Manager(String name, double salary,double bonus) {
         super(name, salary);

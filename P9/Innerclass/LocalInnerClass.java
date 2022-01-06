@@ -12,7 +12,7 @@ public class LocalInnerClass {
 }
 
 class Outer02{
-    private int n1 = 100;
+    private final int n1 = 100;
     private void m2(){
         System.out.println("Outer m2()");
     }

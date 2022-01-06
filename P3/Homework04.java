@@ -1,4 +1,4 @@
-package P3;
+package src.P3;
 
 public class Homework04 {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class Homework04 {
         char c = 'f';
         String s2 = c + "";//char转换为字符串
         System.out.println(s2);
-        System.out.println(7>5?true:false);
+        System.out.println(7 > 5);
 
     }
 }

@@ -12,7 +12,7 @@ abstract class Animal{
     * 由子类实现抽象方法
     *
     * */
-    private String name;
+    private final String name;
     public Animal(String name) {
         this.name = name;
     }

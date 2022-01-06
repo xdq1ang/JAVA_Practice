@@ -15,7 +15,7 @@ public class AnonymousInnerClassDetail {
     }
 }
 class Outer05{
-    private int n1 = 99;
+    private final int n1 = 99;
     public void f1(){
         //调用方式1
         Person p =new Person(){

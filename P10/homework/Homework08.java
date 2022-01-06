@@ -36,9 +36,9 @@ interface Op{
 }
 enum Color implements Op{
     RED(255,0,0),BLUE(0,0,255),BLACK(0,0,0),YELLOW(255,255,0),GREEN(0,255,0);
-    private int redValue;
-    private int greenValue;
-    private int blueValue;
+    private final int redValue;
+    private final int greenValue;
+    private final int blueValue;
 
     Color(int redValue, int greenValue, int blueValue) {
         this.redValue = redValue;
@@ -48,7 +48,7 @@ enum Color implements Op{
 
     @Override
     public void show() {
-        System.out.println(toString());
+        System.out.println(this);
     }
 
     @Override

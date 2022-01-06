@@ -7,8 +7,8 @@ public class OverrideExercise {
     }
 }
 class Person{
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
     public Person(String name, int age){
         this.name = name;
         this.age = age;
@@ -18,8 +18,8 @@ class Person{
     }
 }
 class Student extends Person{
-    private String id;
-    private String score;
+    private final String id;
+    private final String score;
     public Student(String name,int age,String id,String score){
         super(name,age);
         this.id = id;

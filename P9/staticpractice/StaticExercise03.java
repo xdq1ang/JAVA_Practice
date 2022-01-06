@@ -8,7 +8,7 @@ public class StaticExercise03 {
 }
 
 class Person1{
-    private int id;
+    private final int id;
     private static int total=0;
     public static void setTotalPerson(int total){
         //this.total = total;//静态变量属于整个类。

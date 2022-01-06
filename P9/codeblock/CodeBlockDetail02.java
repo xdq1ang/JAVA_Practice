@@ -7,8 +7,8 @@ public class CodeBlockDetail02 {
 }
 
 class A{
-    private int n2  = getN2();
-    private static int n1 = getN1();
+    private final int n2  = getN2();
+    private static final int n1 = getN1();
     static{
         System.out.println("A 静态代码块01");
     }
