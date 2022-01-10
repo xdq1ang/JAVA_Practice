@@ -21,7 +21,7 @@ public class CollectionIterator {
         //当退出while循环后，这是iterator指向了最后的元素，再执行.next()会抛出异常
         //如果希望再次遍历需要重置迭代器
 
-        //增强for
+        //增强for，调用的仍然是Iterator迭代器
         for (Object s: arrayList) {
             System.out.println(s);
         }
