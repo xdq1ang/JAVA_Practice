@@ -7,3 +7,6 @@ Map存储的是键值对。（其实Set存储的也是的键值对，只不过va
 5. Map的Key可以为null，value也可以为null。只能有一个Key为null，可以有多个value为null
 6. 常用String类作为Map的Key
 7. Key和Value之间存在单向的一对一关系，即通过指定的Key总能找到对应的value
+8. Map存放数据的key-value示意图，一对k-v是放在一个Node中的，又因为Node实现了Entry接口有的书又称一对k-v就是一个Entry
+
+![](.map_images/69b4bf11.png)
