@@ -7,6 +7,23 @@ Map存储的是键值对。（其实Set存储的也是的键值对，只不过va
 5. Map的Key可以为null，value也可以为null。只能有一个Key为null，可以有多个value为null
 6. 常用String类作为Map的Key
 7. Key和Value之间存在单向的一对一关系，即通过指定的Key总能找到对应的value
-8. Map存放数据的key-value示意图，一对k-v是放在一个Node中的，又因为Node实现了Entry接口有的书又称一对k-v就是一个Entry
+8. Map存放数据的key-value示意图，一对k-v是放在一个Node中的，又因为Node实现了Entry接口有的书又称一对k-v就是一个Entry。因为Entry提供了getKey(),getValue()方法)
 
 ![](.map_images/69b4bf11.png)
+
+把table中的节点地址封装在Entry然后存储在EntrySet中
+![](.map_images/39950d67.png)
+
+# HashMap小节
+1. Map接口的常用实现类：HashMap,HashTable,Properties
+2. HashMap是Map接口使用频率最高的实现类
+3. HashMap是以Key-Value对的方式存储数据
+4. Key不能重复但是Key可以重复
+5. 相同的Key会发生覆盖
+6. 与HashSet一样，不保证映射顺序，底层是通过hash表的方式存储。
+7. HashMap没有实现同步，所以是线程不安全的。
+
+![](.map_images/1b962316.png)
+
+# HashMap底层机制
+![](.map_images/49eedaaf.png)
