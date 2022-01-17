@@ -27,3 +27,18 @@ Map存储的是键值对。（其实Set存储的也是的键值对，只不过va
 
 # HashMap底层机制
 ![](.map_images/49eedaaf.png)
+
+# HashTable的基本介绍
+1. 存放元素的是键值对：K-V
+2. HashTable的键和值都不能为null，否则会抛出NullPointException
+3. HashTable和HashMap的使用方法基本上一样
+4. HashTable是线程安全的，HashMap是线程不安全的
+5. hashtable底层是一个数组hashtable$Entry[],初始化大小为11
+6. threshold = 8 = 11*0.75  `int newCapacity = (oldCapacity << 1) + 1;`
+
+实例：
+
+![](.map_images/c7b81ff4.png)
+
+# hashmap和hashtable对比
+![](.map_images/dd3e1d6c.png)
