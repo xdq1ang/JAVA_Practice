@@ -19,11 +19,19 @@ public class Homework01 {
         System.out.println(dao.list());
 
     }
+    //通过junit测测试
+    @Test
+    public void testList(){
+        DAO<User> dao = new DAO<>();
+        dao.save("54",new User(54,40,"xdqiang"));
+        dao.save("51",new User(51,43,"CL"));
+        dao.save("53",new User(53,47,"GGG"));
+        System.out.println(dao.list());
+    }
 }
 
 class DAO<T>{
     Map<String,T> map = new HashMap<>();
-    @Test
     public void save(String id,T entity){
         map.put(id,entity);
         System.out.println("saved !");
@@ -32,7 +40,7 @@ class DAO<T>{
         return map.get(id);
     }
     public void update(String id,T entity){
-        map.replace(id,entity);
+        map.put(id,entity);
     }
     public List<T> list(){
         Set<String> keySet = map.keySet();
