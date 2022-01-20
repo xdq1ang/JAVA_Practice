@@ -1,4 +1,4 @@
-package src.tankgame.draw;
+package src.tankgame.notes.draw;
 
 import javax.swing.*;
 import java.awt.*;

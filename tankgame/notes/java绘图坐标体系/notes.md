@@ -12,8 +12,9 @@ Component类提供了两个和绘图相关最重要的方法：
 3. repaint()函数被调用
 
 # 使用实例
+
 ```java
-package src.tankgame.draw;
+package src.tankgame.notes.draw;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,11 +24,12 @@ import java.awt.*;
  */
 public class DrawCircle extends JFrame {//JFrame对应的窗口，可以理解为画框
     //定义一个面板
-    private MyPanel mp =null;
-    public DrawCircle()  {
+    private MyPanel mp = null;
+
+    public DrawCircle() {
         mp = new MyPanel();
         this.add(mp);
-        this.setSize(400,300);
+        this.setSize(400, 300);
         this.setVisible(true);//可以显示
     }
 
@@ -39,12 +41,12 @@ public class DrawCircle extends JFrame {//JFrame对应的窗口，可以理解�
 }
 
 //1.定义一个面板MyPanel,继承JPanel类。
-class MyPanel extends JPanel{
+class MyPanel extends JPanel {
     @Override
     public void paint(Graphics g) {//Graphics可以理解为画笔，提供了很多绘图的方法
         super.paint(g);//调用父类的方法完成初始化
         System.out.println("调用了paint()");
-        g.drawOval(10,10,100,100);
+        g.drawOval(10, 10, 100, 100);
     }
 }
 
