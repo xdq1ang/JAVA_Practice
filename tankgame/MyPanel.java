@@ -169,12 +169,14 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
                 Enemy enemy = it0.next();
                 for(Bullet bullet: Hero.bullets){
                     if(enemy.Dead(bullet)){
+                        bullet.setLive(false);
                         it0.remove();
                     }
                 }
             //我方坦克阵亡
             for (Bullet bullet:Enemy.bullets) {
                 if(hero.Dead(bullet)){
+                    bullet.setLive(false);
                     System.out.println("我军阵亡");
                 }
             }

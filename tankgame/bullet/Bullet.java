@@ -56,7 +56,7 @@ public class Bullet extends Thread {//内部类
                 e.printStackTrace();
             }
             //System.out.println("子弹当前位置：" + this.x + "," + this.y);
-            if(this.x>=1000||this.x<=0||this.y>=750||this.y<=0){
+            if(this.x>=1000||this.x<=0||this.y>=750||this.y<=0||!isLive){
                 //System.out.println("子弹已经销毁");
                 isLive = false;
                 return;
@@ -90,5 +90,9 @@ public class Bullet extends Thread {//内部类
 
     public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
     }
 }
