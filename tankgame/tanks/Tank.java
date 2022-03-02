@@ -1,5 +1,10 @@
 package src.tankgame.tanks;
 
+import src.tankgame.bullet.Bullet;
+
+import java.util.ArrayList;
+import java.util.Vector;
+
 /*
  *   @author : xdqiang
  */
@@ -8,6 +13,8 @@ public class Tank {
     private int y;
     private int direction;
     private int speed=1;
+    private boolean isLive=true;
+
 
     public Tank(int x, int y, int direction) {
         this.x = x;
@@ -56,6 +63,7 @@ public class Tank {
     public int getSpeed() {
         return speed;
     }
+
     //设置速度
     public void setSpeed(int speed){
         if(speed==0){
@@ -63,5 +71,36 @@ public class Tank {
             return;
         }
         this.speed = speed;
+    }
+    //射击
+    public void shot(){
+        //在子类中实现
+    }
+
+    public boolean Dead(Bullet bullet){
+        if(getDirection()==0 || getDirection()==2){
+            int x1 = getX();
+            int x2 = getX()+40;
+            int y1 = getY();
+            int y2 = getY()+60;
+            if(bullet.getX() > x1 && bullet.getX() < x2 && bullet.getY() > y1 && bullet.getY() < y2){
+                System.out.println("被击中");
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            int x1 = getX();
+            int x2 = getX()+60;
+            int y1 = getY();
+            int y2 = getY()+20;
+            if(bullet.getX() > x1 && bullet.getX() < x2 && bullet.getY() > y1 && bullet.getY() < y2){
+                System.out.println("被击中");
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     }
 }

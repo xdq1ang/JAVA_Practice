@@ -49,22 +49,28 @@ class SellTicket01 extends Thread{
     }
 }
 class SellTicket02 extends Thread{
-    private int ticketNun = 100;
-    @Override
-    public void run() {
-        while(true){
-            if(ticketNun<=0){
+    private int ticketNun = 50;
+    private boolean loop = true;
+    public /*synchronized*/ void sell() {//加锁(synchronized是非公平锁)，在同一时刻只能有一个线程来执行run()
+        synchronized (this) {//这里的this可以是其他对象（同一个）
+            if (ticketNun <= 0) {
                 System.out.println("售票结束");
-                break;
+                loop = false;
+                return;
             }
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("窗口"+Thread.currentThread()+"售出一张票\n"+
-                    "剩余"+(--ticketNun)+"张票");
-
+            System.out.println("窗口" + Thread.currentThread() + "售出一张票\n" +
+                    "剩余" + (--ticketNun) + "张票");
+        }
+    }
+    @Override
+    public void run() {
+        while(loop){
+            sell();
         }
 
     }

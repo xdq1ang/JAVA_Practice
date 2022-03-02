@@ -1,5 +1,6 @@
 package src.tankgame;
 
+import src.tankgame.bullet.Bullet;
 import src.tankgame.tanks.Enemy;
 import src.tankgame.tanks.Hero;
 
@@ -7,12 +8,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
 
 /*
  *   @author : xdqiang
  */
-public class MyPanel extends JPanel implements KeyListener {
+
+//为了让Panel不停绘制子弹，要将Panel实现多线程
+public class MyPanel extends JPanel implements KeyListener,Runnable {
     //定义我的坦克
     //初始化位置
     Hero hero ;//玩家自己
@@ -24,7 +29,9 @@ public class MyPanel extends JPanel implements KeyListener {
         hero.setSpeed(2);
         //敌军坦克初始化
         for (int i = 0; i < enemySize; i++) {
-            enemys.add(new Enemy(200*(i+1),100,2));
+            Enemy enemy = new Enemy(200*(i+1),100,2);
+            enemy.shot();
+            enemys.add(enemy);
         }
     }
 
@@ -35,10 +42,43 @@ public class MyPanel extends JPanel implements KeyListener {
         //绘制玩家坦克
         drawTank(hero.getX(),hero.getY(),g,hero.getDirection(),1);
         //绘制敌军坦克
-        for (Enemy enemy :enemys) {
+        for(Enemy enemy : enemys){
             drawTank(enemy.getX(), enemy.getY(),g, enemy.getDirection(),0);
         }
 
+        //绘制我方子弹
+        if(hero.bullets!=null) {
+            Iterator<Bullet> it = hero.bullets.iterator();
+            while(it.hasNext()){
+                Bullet bullet = it.next();
+                if(bullet.isAlive()){
+                    g.setColor(Color.YELLOW);
+                    g.fill3DRect(bullet.getX(), bullet.getY(), 10, 10,true);
+                }else {
+                    it.remove();
+                }
+               // System.out.println(hero.bullets.size());
+            }
+        }
+        //绘制敌军子弹
+        if(enemys!=null){
+            for (Enemy emeny:enemys) {
+                if(emeny.bullets!=null) {
+                    Iterator<Bullet> it = emeny.bullets.iterator();
+                    while(it.hasNext()){
+                        Bullet bullet = it.next();
+                        if(bullet.isAlive()){
+                            g.setColor(Color.CYAN);
+                            g.fill3DRect(bullet.getX(), bullet.getY(), 10, 10,true);
+                            //System.out.println(emeny.getBullets().size());
+                        }else{
+                            it.remove();
+                        }
+                    }
+                }
+            }
+
+        }
     }
     //坦克
     /*
@@ -110,6 +150,10 @@ public class MyPanel extends JPanel implements KeyListener {
             hero.moveUp();
             hero.setDirection(0);
             repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_J){
+            //System.out.println("坦克坐标为："+hero.getX()+","+hero.getY());
+            hero.shot();
+            repaint();
         }
     }
 
@@ -117,5 +161,41 @@ public class MyPanel extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+    //击杀判断
+    public void shot(Hero hero, Vector<Enemy> enemys){
+        //敌方坦克阵亡
+            Iterator<Enemy> it0 = enemys.iterator();
+            while(it0.hasNext()){
+                Enemy enemy = it0.next();
+                for(Bullet bullet: Hero.bullets){
+                    if(enemy.Dead(bullet)){
+                        it0.remove();
+                    }
+                }
+            //我方坦克阵亡
+            for (Bullet bullet:Enemy.bullets) {
+                if(hero.Dead(bullet)){
+                    System.out.println("我军阵亡");
+                }
+            }
+        }
 
+
+    }
+
+    @Override
+    public void run() {//每次30毫秒重绘制面板
+        while(true){
+            shot(hero,enemys);//击杀判断
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.repaint();
+
+        }
+
+
+    }
 }
