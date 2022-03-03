@@ -1,5 +1,6 @@
 package src.tankgame;
 
+import src.tankgame.bomb.Bomb;
 import src.tankgame.bullet.Bullet;
 import src.tankgame.tanks.Enemy;
 import src.tankgame.tanks.Hero;
@@ -22,7 +23,15 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
     //初始化位置
     Hero hero ;//玩家自己
     Vector<Enemy> enemys = new Vector<>();//敌军坦克集合
+    Vector<Bomb> bombs = new Vector<Bomb>();//存放炸弹(当子弹击中坦克时加入炸弹对象到Vector中)
     int enemySize=3;
+
+    //定义三张图片用于显示炸弹爆炸效果
+    Image image1 = null;
+    Image image2 = null;
+    Image image3 = null;
+    Image image4 = null;
+
     public MyPanel(){
         //玩家坦克初始化
         hero = new Hero(500,500,0);//初始化坦克
@@ -33,6 +42,11 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
             enemy.shot();
             enemys.add(enemy);
         }
+        //初始化图片对象
+        image1 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb_1.gif"));
+        image2 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb_2.png"));
+        image3 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb_3.png"));
+        image4 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb_4.png"));
     }
 
     @Override
@@ -79,6 +93,27 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
             }
 
         }
+        //绘制炸弹，如果有炸弹则绘制
+        for (int i = 0; i < bombs.size(); i++) {
+            Bomb bomb = bombs.get(i);
+            //根据炸弹的life值绘制相应的图片
+            if(bomb.getLife() > 6) {
+                g.drawImage(image1, bomb.getX(), bomb.getY(), 60, 60, this);
+            }else if(bomb.getLife()>4){
+                g.drawImage(image2,bomb.getX(),bomb.getY(),60,60,this);
+            }else if(bomb.getLife()>2){
+                g.drawImage(image3,bomb.getX(),bomb.getY(),60,60,this);
+            }else{
+                g.drawImage(image4,bomb.getX(),bomb.getY(),60,60,this);
+            }
+            //炸弹的生命减少
+            bomb.lifeDown();
+            //如果炸弹 life为0 则删除这个炸弹
+            if(bomb.getLife()==0){
+                bombs.remove(bomb);
+            }
+        }
+
     }
     //坦克
     /*
@@ -168,18 +203,31 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
             while(it0.hasNext()){
                 Enemy enemy = it0.next();
                 for(Bullet bullet: Hero.bullets){
-                    if(enemy.Dead(bullet)){
-                        bullet.setLive(false);
-                        it0.remove();
+                    if(enemy.isLive()){
+                        if(enemy.Dead(bullet)){
+                            //创建炸弹并加入到Vector中
+                            Bomb bomb = new Bomb(enemy.getX(),enemy.getY());
+                            bombs.add(bomb);
+                            bullet.setLive(false);
+                            it0.remove();
+                        }
                     }
+
                 }
             //我方坦克阵亡
             for (Bullet bullet:Enemy.bullets) {
-                if(hero.Dead(bullet)){
-                    bullet.setLive(false);
-                    System.out.println("我军阵亡");
+                if(hero.isLive()){
+                    if(hero.Dead(bullet)){
+                        bullet.setLive(false);
+                        //创建炸弹并加入到Vector中
+                        Bomb bomb = new Bomb(hero.getX(),hero.getY());
+                        bombs.add(bomb);
+                        System.out.println("我军阵亡");
+                    }
                 }
+
             }
+                System.out.println("炸弹个数："+bombs.size());
         }
 
 

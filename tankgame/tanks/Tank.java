@@ -1,5 +1,6 @@
 package src.tankgame.tanks;
 
+import src.tankgame.bomb.Bomb;
 import src.tankgame.bullet.Bullet;
 
 import java.util.ArrayList;
@@ -64,6 +65,10 @@ public class Tank {
         return speed;
     }
 
+    public boolean isLive() {
+        return isLive;
+    }
+
     //设置速度
     public void setSpeed(int speed){
         if(speed==0){
@@ -85,6 +90,7 @@ public class Tank {
             int y2 = getY()+60;
             if(bullet.getX() > x1 && bullet.getX() < x2 && bullet.getY() > y1 && bullet.getY() < y2){
                 System.out.println("被击中");
+                isLive = false;
                 return true;
             }else{
                 return false;
@@ -96,6 +102,7 @@ public class Tank {
             int y2 = getY()+20;
             if(bullet.getX() > x1 && bullet.getX() < x2 && bullet.getY() > y1 && bullet.getY() < y2){
                 System.out.println("被击中");
+                isLive = false;
                 return true;
             }else{
                 return false;
