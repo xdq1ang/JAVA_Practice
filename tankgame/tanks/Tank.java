@@ -26,15 +26,19 @@ public class Tank {
     //移动
     public void moveUp(){
         y-=10*speed;
+        this.direction=0;
     }
     public void moveDown(){
         y+=10*speed;
+        this.direction=2;
     }
     public void moveLeft(){
         x-=10*speed;
+        this.direction=3;
     }
     public void moveRight(){
         x+=10*speed;
+        this.direction=1;
     }
 
     public int getX() {
@@ -67,6 +71,10 @@ public class Tank {
 
     public boolean isLive() {
         return isLive;
+    }
+
+    public void setLive(boolean live) {
+        isLive = live;
     }
 
     //设置速度
