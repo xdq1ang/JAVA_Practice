@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 /*
@@ -20,7 +22,7 @@ import java.util.Vector;
 public class MyPanel extends JPanel implements KeyListener,Runnable {
     //定义我的坦克
     //初始化位置
-    Hero hero ;//玩家自己
+    HashMap<String,Hero> heroes = new HashMap<>();//我军坦克集合
     Vector<Enemy> enemys = new Vector<>();//敌军坦克集合
     Vector<Bomb> bombs = new Vector<>();//存放炸弹(当子弹击中坦克时加入炸弹对象到Vector中)
     int enemySize=3;
@@ -33,11 +35,15 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
 
     public MyPanel(){
         //玩家坦克初始化
-        hero = new Hero(500,500,0);//初始化坦克
-        hero.setSpeed(2);
+        Hero hero1 = new Hero(300,500,0);//初始化坦克
+        hero1.setSpeed(2);
+        Hero hero2 = new Hero(600, 500, 0);
+        hero2.setSpeed(2);
+        heroes.put("hero1",hero1);
+        heroes.put("hero2",hero2);
         //敌军坦克初始化
         for (int i = 0; i < enemySize; i++) {
-            Enemy enemy = new Enemy(200*(i+1),100,2,hero);
+            Enemy enemy = new Enemy(200*(i+1),100,2, heroes);
             Thread thread = new Thread(enemy);
             thread.start();
             enemy.shot();
@@ -55,15 +61,22 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
         super.paint(g);
         g.fillRect(0,0,1000,750);//绘制游戏地图：填充矩形，黑色
         //绘制玩家坦克
-        drawTank(hero.getX(),hero.getY(),g,hero.getDirection(),1);
+        for (String hero_name:heroes.keySet()) {
+            if(heroes.get(hero_name).isLive()){
+                drawTank(heroes.get(hero_name).getX(), heroes.get(hero_name).getY(),g, heroes.get(hero_name).getDirection(),1);
+            }
+        }
+
         //绘制敌军坦克
         for(Enemy enemy : enemys){
-            drawTank(enemy.getX(), enemy.getY(),g, enemy.getDirection(),0);
+            if(enemy.isLive()){
+                drawTank(enemy.getX(), enemy.getY(),g, enemy.getDirection(),0);
+            }
         }
 
         //绘制我方子弹
-        if(Hero.bullets!=null) {
-            Iterator<Bullet> it = Hero.bullets.iterator();
+        if(heroes.get("hero1").bullets!=null) {
+            Iterator<Bullet> it = heroes.get("hero1").bullets.iterator();
             while(it.hasNext()){
                 Bullet bullet = it.next();
                 if(bullet.isAlive()){
@@ -164,24 +177,44 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode()==KeyEvent.VK_D){
-            hero.moveRight();
-            hero.setDirection(1);
+            heroes.get("hero1").moveRight();
+            heroes.get("hero1").setDirection(1);
             repaint();
         }else if(e.getKeyCode()==KeyEvent.VK_A){
-            hero.moveLeft();
-            hero.setDirection(3);
+            heroes.get("hero1").moveLeft();
+            heroes.get("hero1").setDirection(3);
             repaint();
         }else if(e.getKeyCode()==KeyEvent.VK_S){
-            hero.moveDown();
-            hero.setDirection(2);
+            heroes.get("hero1").moveDown();
+            heroes.get("hero1").setDirection(2);
             repaint();
         }else if(e.getKeyCode()==KeyEvent.VK_W){
-            hero.moveUp();
-            hero.setDirection(0);
+            heroes.get("hero1").moveUp();
+            heroes.get("hero1").setDirection(0);
             repaint();
         }else if(e.getKeyCode()==KeyEvent.VK_J){
             //System.out.println("坦克坐标为："+hero.getX()+","+hero.getY());
-            hero.shot();
+            heroes.get("hero1").shot();
+            repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+            heroes.get("hero2").moveRight();
+            heroes.get("hero2").setDirection(1);
+            repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+            heroes.get("hero2").moveLeft();
+            heroes.get("hero2").setDirection(3);
+            repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_DOWN){
+            heroes.get("hero2").moveDown();
+            heroes.get("hero2").setDirection(2);
+            repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_UP){
+            heroes.get("hero2").moveUp();
+            heroes.get("hero2").setDirection(0);
+            repaint();
+        }else if(e.getKeyCode()==KeyEvent.VK_L){
+            //System.out.println("坦克坐标为："+hero.getX()+","+hero.getY());
+            heroes.get("hero2").shot();
             repaint();
         }
     }
@@ -191,12 +224,12 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
 
     }
     //击杀判断
-    public void shot(Hero hero, Vector<Enemy> enemys){
+    public void shot(HashMap<String,Hero> heroes, Vector<Enemy> enemys){
         //敌方坦克阵亡
             Iterator<Enemy> it0 = enemys.iterator();
             while(it0.hasNext()){
                 Enemy enemy = it0.next();
-                for(Bullet bullet: Hero.bullets){
+                for(Bullet bullet: heroes.get("hero1").bullets){
                     if(enemy.isLive()){
                         if(enemy.Dead(bullet)){
                             //创建炸弹并加入到Vector中
@@ -210,17 +243,18 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
                 }
             //我方坦克阵亡
             for (Bullet bullet:Enemy.bullets) {
-                if(hero.isLive()){
-                    if(hero.Dead(bullet)){
-                        hero.setLive(false);
-                        bullet.setLive(false);
-                        //创建炸弹并加入到Vector中
-                        Bomb bomb = new Bomb(hero.getX(),hero.getY());
-                        bombs.add(bomb);
-                        System.out.println("我军阵亡");
+                for(Hero hero: heroes.values()){
+                    if(hero.isLive()){
+                        if(hero.Dead(bullet)){
+                            hero.setLive(false);
+                            bullet.setLive(false);
+                            //创建炸弹并加入到Vector中
+                            Bomb bomb = new Bomb(hero.getX(),hero.getY());
+                            bombs.add(bomb);
+                            System.out.println("我军阵亡");
+                        }
                     }
                 }
-
             }
                 //System.out.println("炸弹个数："+bombs.size());
         }
@@ -231,7 +265,7 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
     @Override
     public void run() {//每次30毫秒重绘制面板
         while(true){
-            shot(hero,enemys);//击杀判断
+            shot(heroes,enemys);//击杀判断
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {

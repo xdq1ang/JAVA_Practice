@@ -18,6 +18,7 @@ public class Hero extends Tank{
     public void shot() {
         Bullet bullet = new Bullet(this.getX(),this.getY(),this.getDirection(),0);
         bullets.add(bullet);
+        System.out.print("我的子弹数："+bullets.size()+"\n");
         bullet.start();
     }
 }

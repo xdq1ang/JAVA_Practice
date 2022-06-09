@@ -25,19 +25,28 @@ public class Tank {
 
     //移动
     public void moveUp(){
-        y-=10*speed;
+        if(y>0){
+            y-=10*speed;
+        }
         this.direction=0;
     }
     public void moveDown(){
-        y+=10*speed;
+        if(y+60<750){
+            y+=10*speed;
+        }
         this.direction=2;
     }
     public void moveLeft(){
-        x-=10*speed;
+        if(x>0){
+            x-=10*speed;
+        }
         this.direction=3;
     }
     public void moveRight(){
-        x+=10*speed;
+        if(x+60<1000){
+            x+=10*speed;
+        }
+
         this.direction=1;
     }
 

@@ -15,7 +15,7 @@ public class Enemy extends Tank implements Runnable{
     *
     * */
 
-    private Vector<Hero> heroes = new Vector<>();
+    private Collection<Hero> heroes;
     private Hero nearestHero;
     public static Vector<Bullet> bullets= new Vector<>();//子弹集合
     HashMap disMap = new HashMap();
@@ -23,9 +23,9 @@ public class Enemy extends Tank implements Runnable{
     Random random =new Random();
     double runDirection;
 
-    public Enemy(int x, int y, int direction,Hero hero) {
+    public Enemy(int x, int y, int direction,HashMap<String,Hero> heros) {
         super(x, y, direction);
-        this.heroes.add(hero);
+        this.heroes = heros.values();
     }
 
 
@@ -38,7 +38,7 @@ public class Enemy extends Tank implements Runnable{
         bullet.start();
 
     }
-    public void track(Vector<Hero> heroes){
+    public void track(Collection<Hero> heroes){
         //从bombs中选取一个距离最近的坦克，
         int x0;
         int y0;
@@ -88,7 +88,7 @@ public class Enemy extends Tank implements Runnable{
 
 
 
-        System.out.println("敌军坐标："+getX()+","+getY());
+       // System.out.println("敌军坐标："+getX()+","+getY());
 
     }
 
