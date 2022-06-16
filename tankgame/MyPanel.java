@@ -267,7 +267,7 @@ public class MyPanel extends JPanel implements KeyListener,Runnable {
         while(true){
             shot(heroes,enemys);//击杀判断
             try {
-                Thread.sleep(30);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
