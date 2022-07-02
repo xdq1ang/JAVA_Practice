@@ -3,9 +3,7 @@ package src.P16.inputstream;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.PublicKey;
 
 /*
  *   @author : xdqiang
@@ -44,9 +42,9 @@ public class FileInputStream_ {
     }
     @Test
     public void readFile02() {
-        String filePath = "D:\\JAVA_Practice\\src\\P16\\inputstream\\hello.txt";
+        String filePath = "P16\\inputstream\\hello.txt";
         //定义一个字节数组。一次性存储8个字节
-        byte[] buf = new byte[8];
+        byte[] buf = new byte[80];
         int readLength = 0;
         FileInputStream fileInputStream = null;
         try {

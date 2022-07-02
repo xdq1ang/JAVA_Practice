@@ -14,7 +14,7 @@ public class FileWriter_ {
     }
     @Test
     public void fileWriter01(){
-        String path = "src/P16/filewriter/file.txt";
+        String path = "P16/filewriter/file.txt";
         FileWriter fileWriter = null;
         char[] chrs = new char[]{'a','b','c'};
         try {
